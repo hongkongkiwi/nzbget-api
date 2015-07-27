@@ -11,11 +11,16 @@
   },
   "author": "Andy Savage <andy@savage.hk> (http://andy.savage.hk/)",
   "license": "MIT",
+  "keywords": [
+    "nzbget",
+    "nzb"
+  ],
   "dependencies": {
     "node-json-rpc": "0.0.1",
     "xtend": "^4.0.0"
   },
   "devDependencies": {
-    "chai": "^3.2.0"
+    "chai": "^3.2.0",
+    "mocha": "^2.2.5"
   }
 }
