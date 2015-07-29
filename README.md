@@ -58,3 +58,5 @@ The testing is done with mocha and nock with saved JSON responses. You do not ne
 This project is under the MIT License. See [license file](https://raw.githubusercontent.com/hongkongkiwi/nzbget-api/master/LICENSE) for more details.
 
 ### Contributing
+
+Please send a pull request if you have any additions to the library.
