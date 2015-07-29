@@ -1,0 +1,7 @@
+{
+  "cmd": "version",
+  "response": {
+    "version": "1.1",
+    "result": "15.0"
+  }
+}

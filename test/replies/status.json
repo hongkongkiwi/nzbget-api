@@ -1,0 +1,47 @@
+{
+  "cmd": "status",
+  "response": {
+    "version": "1.1",
+    "result": {
+      "RemainingSizeLo": 0,
+      "RemainingSizeHi": 0,
+      "RemainingSizeMB": 0,
+      "ForcedSizeLo": 0,
+      "ForcedSizeHi": 0,
+      "ForcedSizeMB": 0,
+      "DownloadedSizeLo": 0,
+      "DownloadedSizeHi": 0,
+      "DownloadedSizeMB": 0,
+      "ArticleCacheLo": 0,
+      "ArticleCacheHi": 0,
+      "ArticleCacheMB": 0,
+      "DownloadRate": 0,
+      "AverageDownloadRate": 0,
+      "DownloadLimit": 0,
+      "ThreadCount": 5,
+      "ParJobCount": 0,
+      "PostJobCount": 0,
+      "UrlCount": 0,
+      "UpTimeSec": 7,
+      "DownloadTimeSec": 0,
+      "ServerPaused": false,
+      "DownloadPaused": false,
+      "Download2Paused": false,
+      "ServerStandBy": true,
+      "PostPaused": false,
+      "ScanPaused": false,
+      "FreeDiskSpaceLo": 4294967295,
+      "FreeDiskSpaceHi": 4294967295,
+      "FreeDiskSpaceMB": 0,
+      "ServerTime": 1438173703,
+      "ResumeTime": 0,
+      "FeedActive": false,
+      "NewsServers": [
+        {
+          "ID": 1,
+          "Active": true
+        }
+      ]
+    }
+  }
+}

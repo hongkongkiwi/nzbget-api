@@ -1,5 +1,7 @@
 var rpc = require('node-json-rpc');
 var xtend = require('xtend');
+var fs = require('fs');
+var path = require('path');
 
 var supportedVersions = [
   '15.0'
@@ -18,22 +20,32 @@ var NZBGet = function(options) {
 
   // Create a server object with options
   this._jsonClient = new rpc.Client(this.options);
-}
 
-NZBGet.prototype._call = function(cmd, params, callback) {
-  if (typeof params === 'undefined' || params == null) {
-    params = [];
+  this._call = function(cmd, params, callback) {
+    if (typeof params === 'undefined' || params == null) {
+      params = [];
+    }
+    if (!callback && typeof params === 'function') {
+        callback = params;
+    }
+    this._jsonClient.call({"jsonrpc": "1.0", "method": cmd, "params": params}, function(err, result) {
+      if (options.hasOwnProperty('saveResponses') && options.saveResponses && options.hasOwnProperty('testJsonDir') && result) {
+        var output = {
+          cmd: cmd,
+          params: params,
+          response: result
+        }
+        fs.writeFileSync(path.join(options.testJsonDir, cmd + '.json'), JSON.stringify(output, null, 2));
+      }
+      callback(err, result['result']);
+    });
   }
-  if (!callback && typeof params === 'function') {
-      callback = params;
-  }
-  this._jsonClient.call({"jsonrpc": "1.0", "method": cmd, "params": params}, function(err, result) {
-    callback(err, result['result']);
-  });
 }
 
 //https://github.com/nzbget/nzbget/wiki/API
 /* Program control */
+
+NZBGet.prototype.options = {};
 
 //version
 //https://github.com/nzbget/nzbget/wiki/API-Method-%22version%22
@@ -48,7 +60,6 @@ NZBGet.prototype.version = function(callback) {
     }
     callback(err, result);
   });
-
 }
 //shutdown
 //https://github.com/nzbget/nzbget/wiki/API-Method-%22shutdown%22
@@ -79,7 +90,7 @@ NZBGet.prototype.history = function(showHidden, callback) {
 NZBGet.prototype.append = function(nzbFilename, nzbContent, category, priority, addToTop, addPaused, dupeKey, dupeScore, dupeMode, callback) {
   this._call('append', [nzbFilename, nzbContent, category, priority, addToTop, addPaused, dupeKey, dupeScore, dupeMode], callback);
 }
-NZBGet.QueueCommand = {
+NZBGet.prototype.QueueCommand = {
     FileMoveOffset: 'FileMoveOffset',
     FileMoveTop: 'FileMoveTop',
     FileMoveBottom: 'FileMoveBottom',
@@ -149,9 +160,16 @@ NZBGet.prototype.status = function(callback) {
 NZBGet.prototype.log = function(idFrom, numberOfEntries, callback) {
   this._call('log', [idFrom, numberOfEntries], callback);
 }
+NZBGet.prototype.LOGTYPE = {
+  INFO: 'INFO',
+  WARNING: 'WARNING',
+  ERROR: 'ERROR',
+  DETAIL: 'DETAIL',
+  DEBUG: 'DEBUG'
+}
 // writelog
 NZBGet.prototype.writeLog = function(kind, text, callback) {
-  this._call('writelog', [kind, test], callback);
+  this._call('writelog', [kind, text], callback);
 }
 // loadlog
 NZBGet.prototype.loadLog = function(nzbId, idFrom, numberOfEntries, callback) {

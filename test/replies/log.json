@@ -1,0 +1,18 @@
+{
+  "cmd": "log",
+  "params": [
+    0,
+    1
+  ],
+  "response": {
+    "version": "1.1",
+    "result": [
+      {
+        "ID": 2,
+        "Kind": "INFO",
+        "Time": 1438173703,
+        "Text": "Reloading..."
+      }
+    ]
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "cmd": "history",
+  "params": [
+    true
+  ],
+  "response": {
+    "version": "1.1",
+    "result": []
+  }
+}
